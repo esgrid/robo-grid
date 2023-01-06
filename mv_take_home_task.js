@@ -70,13 +70,12 @@ function moveRobot(robot, grid){
     let outOfBounds = false
     for (let i = 0; i < robot.movements.length && inCondition; i++){
         let movement = robot.movements[i]
-        // console.log(movement)
         if (movement === 'L' || movement === 'R'){
-            console.log(robot.direction, movement)
+            // console.log(robot.direction, movement)
             robot.direction = changeDirection(robot.direction, movement)
-            console.log(robot.direction)
+            // console.log(robot.direction)
         } else {
-            console.log(movement)
+            // console.log(movement)
             if (robot.direction === 'E'){
                 robot.finalPosition[0]++
                 if (!inConditionX()){
@@ -113,18 +112,19 @@ function moveRobot(robot, grid){
 
 const robots = []
 
-console.log(d)
-console.log(grid)
+// console.log(d)
+// console.log(grid)
 
 for (let i = 1; i < d.length; i++){
     makeRobot(d[i], robots)
 }
 
-console.log(robots)
+// console.log(robots)
 
 robots.forEach(robot => {
     moveRobot(robot, grid)
+    console.log(`(${robot.finalPosition[0]}, ${robot.finalPosition[1]}, ${robot.direction}) ${robot.lost ? 'LOST' : ''}`)
 })
 
 
-console.log(robots)
+// console.log(robots)
