@@ -62,6 +62,7 @@ function moveRobot(robot, grid){
                 newIndexOfDirectionInCardinalPoints = 3
             }
         }
+
         return cardinalPoints[newIndexOfDirectionInCardinalPoints]
     }
 
@@ -69,33 +70,37 @@ function moveRobot(robot, grid){
     let outOfBounds = false
     for (let i = 0; i < robot.movements.length && inCondition; i++){
         let movement = robot.movements[i]
+        // console.log(movement)
         if (movement === 'L' || movement === 'R'){
+            console.log(robot.direction, movement)
             robot.direction = changeDirection(robot.direction, movement)
+            console.log(robot.direction)
         } else {
+            console.log(movement)
             if (robot.direction === 'E'){
                 robot.finalPosition[0]++
-                if (!inConditionX){
+                if (!inConditionX()){
                     robot.finalPosition[0]--
                     outOfBounds = true
                     break
                 }
             } else if (robot.direction === 'W'){
                 robot.finalPosition[0]--
-                if (!inConditionX){
+                if (!inConditionX()){
                     robot.finalPosition[0]++
                     outOfBounds = true
                     break
                 }
             } else if (robot.direction === 'N'){
                 robot.finalPosition[1]++
-                if (!inConditionY){
+                if (!inConditionY()){
                     robot.finalPosition[1]--
                     outOfBounds = true
                     break
                 }
             } else {
                 robot.finalPosition[1]--
-                if (!inConditionY){
+                if (!inConditionY()){
                     robot.finalPosition[1]++
                     outOfBounds = true
                     break
