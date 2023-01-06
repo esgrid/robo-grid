@@ -4,22 +4,22 @@ const input = readFileSync('input.txt', 'utf-8')
 // interesting that I need to split using '\r\n' rather than '\n' in windows
 // const d = input.split('\r\n')
 
-//use this for mac
+//use this "d" for mac
 const d = input.split('\n')
 const grid = d[0].split(' ')
             .map(e => Number(e))
             .reverse()
 
-// Structure of Robot            
+// Structure of Robot (example)       
 // const robot = {
-//     initialPosition: [a, b],
+//     initialPosition: [2, 3],
 //     direction: 'E',
 //     movements: 'FLFRFF',
-//     finalPosition: [c, d],
+//     finalPosition: [2, 3],
 //     lost: false
 // }
 
-// maybe make function make robot
+// making a dictionary with the necessary information for the robot
 function makeRobot(robotString, robotsArray){
     const robotInformation = robotString.split(' ')
     const [x0, y0] = [robotInformation[0].slice(1, robotInformation[0].indexOf(',')), robotInformation[1].slice(0, robotInformation[1].indexOf(','))]
@@ -34,10 +34,9 @@ function makeRobot(robotString, robotsArray){
         lost: false
     }
     robotsArray.push(robot)
-    // return robot
-
 }
-// maybe make function move robot
+
+// robot being moved (change its direction and its final position based on the movements)
 function moveRobot(robot, grid){
     function inConditionX() {return robot.finalPosition[0] <= grid[0] && robot.finalPosition[0] >= 0}
     function inConditionY () {return robot.finalPosition[1] <= grid[1] && robot.finalPosition[1] >= 0}
@@ -66,16 +65,14 @@ function moveRobot(robot, grid){
         return cardinalPoints[newIndexOfDirectionInCardinalPoints]
     }
 
-    // while (inCondition){
     let outOfBounds = false
     for (let i = 0; i < robot.movements.length && inCondition; i++){
+
         let movement = robot.movements[i]
+
         if (movement === 'L' || movement === 'R'){
-            // console.log(robot.direction, movement)
             robot.direction = changeDirection(robot.direction, movement)
-            // console.log(robot.direction)
         } else {
-            // console.log(movement)
             if (robot.direction === 'E'){
                 robot.finalPosition[0]++
                 if (!inConditionX()){
@@ -114,19 +111,13 @@ function moveRobot(robot, grid){
 
 const robots = []
 
-// console.log(d)
-// console.log(grid)
-
+// making the robots and adding them to the robots array
 for (let i = 1; i < d.length; i++){
     makeRobot(d[i], robots)
 }
 
-// console.log(robots)
-
+// moving the robots and logging their end state
 robots.forEach(robot => {
     moveRobot(robot, grid)
     console.log(`(${robot.finalPosition[0]}, ${robot.finalPosition[1]}, ${robot.direction}) ${robot.lost ? 'LOST' : ''}`)
 })
-
-
-// console.log(robots)
