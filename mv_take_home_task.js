@@ -107,7 +107,9 @@ function moveRobot(robot, grid){
             }
         }
     }
-    robot.lost = outOfBounds
+    // if inCondition is false then it is outOfbounds but since the for loop never happened I'm assigning !outOfBounds
+    // i.e. true to robot.lost
+    robot.lost = !inCondition ? !outOfBounds : outOfBounds
 }
 
 const robots = []
