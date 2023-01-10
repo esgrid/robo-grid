@@ -1,10 +1,10 @@
 const {readFileSync} = require('fs')
 
 const input = readFileSync('input.txt', 'utf-8')
-// interesting that I need to split using '\r\n' rather than '\n' in windows
+// interesting that I need to split using '\r\n' rather than '\n' in documents I type in Windows
 // const d = input.split('\r\n')
 
-//use this "d" for mac
+//use this "d" for mac or downloaded .txt from github?
 const d = input.split('\n')
 const grid = d[0].split(' ')
             .map(e => Number(e))

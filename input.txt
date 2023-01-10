@@ -6,3 +6,5 @@
 (8, 4, N) LF
 (-1, 0, E) FF
 (0, 5, N) R
+(2, 3, N) FLLFR
+(1, 0, S) FFRLF
